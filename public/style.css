@@ -1,3 +1,8 @@
 #content {
   padding-top: 45px;
 }
+
+.info-file {
+  height: 85px;
+  overflow: scroll;
+}

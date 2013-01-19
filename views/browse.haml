@@ -38,6 +38,9 @@
                 %a{href:folder.browse_path}= folder.name
 
       - if @folder.flacs?
+        %p Info file:
+        %pre.info-file= @folder.info_file
+
         %p FLACs:
         %table.table.table-striped.table-bordered.table-hover.table-condensed
           %thead

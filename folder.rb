@@ -36,4 +36,10 @@ class Folder < Handle
     flacs.any?
   end
 
+  def info_file
+    Dir.chdir(@path)
+    txt_files = Dir.glob("*.txt").sort_by(&:length)
+    File.read(txt_files.first)
+  end
+
 end
