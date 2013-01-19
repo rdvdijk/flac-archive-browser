@@ -13,7 +13,7 @@ class Folder < Handle
   def folders
     @folders ||= begin
                    Dir.chdir(@path)
-                   Dir.glob("*/").map do |dir|
+                   Dir.glob("*/").sort.map do |dir|
                      Folder.new(File.join(@path, dir))
                    end
                  end
@@ -26,7 +26,7 @@ class Folder < Handle
   def flacs
     @flacs ||= begin
                  Dir.chdir(@path)
-                 Dir.glob("*.flac").map do |flac|
+                 Dir.glob("*.flac").sort.map do |flac|
                    Flac.new(File.join(@path, flac))
                  end
                end
