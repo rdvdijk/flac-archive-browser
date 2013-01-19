@@ -38,22 +38,24 @@
       - if @folder.flacs?
         %p FLACs:
         %table.table.table-striped.table-bordered.table-hover.table-condensed
-          %tr
-            %th
-              listen
-            %th 
-              size
-            %th{colspan:3}
-              download
-          - @folder.flacs.each do |flac|
+          %thead
             %tr
-              %td
-                %a{href:flac.listen_path}= flac.name
-              %td
-                = flac.size
-              %td
-                %a{href:flac.flac_path} FLAC
-              %td
-                %a{href:flac.mp3_path} MP3
-              %td
-                %a{href:flac.vorbis_path} OGG/Vorbis
+              %th
+                listen
+              %th 
+                size
+              %th{colspan:3}
+                download
+          %tbody
+            - @folder.flacs.each do |flac|
+              %tr
+                %td
+                  %a{href:flac.listen_path}= flac.name
+                %td
+                  = flac.size
+                %td
+                  %a{href:flac.flac_path} FLAC
+                %td
+                  %a{href:flac.mp3_path} MP3
+                %td
+                  %a{href:flac.vorbis_path} OGG/Vorbis
