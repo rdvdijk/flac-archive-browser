@@ -1,0 +1,32 @@
+!!! 5
+%html
+  %head
+    %title= "FLAC archive browser"
+
+  %body
+    %p
+      %a{href:@folder.parent_browse_path}= @folder.parent_name
+
+    - if @folder.folders?
+      %p Folders:
+      %table
+        - @folder.folders.each do |folder|
+          %tr
+            %td
+              %a{href:folder.browse_path}= folder.name
+
+    - if @folder.flacs?
+      %p FLACs:
+      %table
+        - @folder.flacs.each do |flac|
+          %tr
+            %td
+              %a{href:flac.listen_path}= flac.name
+            %td
+              = flac.size
+            %td
+              %a{href:flac.flac_path} FLAC
+            %td
+              %a{href:flac.mp3_path} MP3
+            %td
+              %a{href:flac.vorbis_path} OGG/Vorbis

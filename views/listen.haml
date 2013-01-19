@@ -1,0 +1,13 @@
+!!! 5
+%html
+  %head
+    %title= "FLAC archive browser"
+
+  %body
+    %h2 Listen:
+    %a{href:@flac.parent_browse_path}= @flac.parent_name
+
+    %p= @flac.path
+
+    %audio{controls:"controls", autoplay:"autoplay", preload:"none"}
+      %source{src:@flac.stream_path}
