@@ -1,4 +1,5 @@
-== FLAC Archive Browser
+FLAC Archive Browser
+====================
 
 Browse your FLAC archive and listen to it in your browser.
 
