@@ -27,6 +27,8 @@
           -#       %a{href:"#"} Contact
 
     #content.container
+      %h3= @folder.name
+
       - if @folder.folders?
         %p Folders:
         %table.table.table-striped.table-bordered.table-hover.table-condensed

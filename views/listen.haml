@@ -22,13 +22,13 @@
                 %a{href:@flac.parent_browse_path}= @flac.parent_name
 
     #content.container
-      %h4= @flac.name
-      %h2 Listen
+      %h3= @flac.name
 
+      %h4 Listen
       %audio{controls:"controls", autoplay:"autoplay", preload:"none"}
         %source{src:@flac.stream_path}
 
-      %h2 Download
+      %h4 Download
       %a{href:@flac.flac_path} FLAC
       \-
       %a{href:@flac.mp3_path} MP3
