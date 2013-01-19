@@ -46,6 +46,8 @@
           %thead
             %tr
               %th
+                file
+              %th
                 listen
               %th 
                 size
@@ -55,7 +57,9 @@
             - @folder.flacs.each do |flac|
               %tr
                 %td
-                  %a{href:flac.listen_path}= flac.name
+                  = flac.name
+                %td
+                  %a{href:flac.listen_path}= flac.title
                 %td
                   = flac.size
                 %td

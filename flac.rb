@@ -1,4 +1,5 @@
 require 'ruby-audio'
+require 'flacinfo'
 
 class Flac < Handle
 
@@ -70,6 +71,16 @@ class Flac < Handle
 
   def ogg_vorbis_data
     %x(flac -s -c -d "#{@path}" | oggenc -Q -q 6 -)
+  end
+
+  def title
+    flac_info.tags["TITLE"]
+  end
+
+  private
+
+  def flac_info
+    @flac_info ||= FlacInfo.new(@path)
   end
 
 end
