@@ -1,13 +1,36 @@
 !!! 5
 %html
   %head
-    %title= "FLAC archive browser"
+    %title= "FLAC Archive Browser"
+    %link(rel="stylesheet" href="/bootstrap/css/bootstrap.min.css") 
+    %link(rel="stylesheet" href="/style.css")
+    %script(type="text/javascript" src="http://code.jquery.com/jquery-latest.js")
+    %script(type="text/javascript" src="/bootstrap/js/bootstrap.min.js")
 
   %body
-    %h2 Listen:
-    %a{href:@flac.parent_browse_path}= @flac.parent_name
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{:"data-toggle"=>"collapse", :"data-target"=>".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{href:'/'} FLAC Archive Browser
+          .nav-collapse.collapse
+            %ul.nav
+              %li.active
+                %a{href:@flac.parent_browse_path}= @flac.parent_name
 
-    %p= @flac.path
+    #content.container
+      %h4= @flac.name
+      %h2 Listen
 
-    %audio{controls:"controls", autoplay:"autoplay", preload:"none"}
-      %source{src:@flac.stream_path}
+      %audio{controls:"controls", autoplay:"autoplay", preload:"none"}
+        %source{src:@flac.stream_path}
+
+      %h2 Download
+      %a{href:@flac.flac_path} FLAC
+      \-
+      %a{href:@flac.mp3_path} MP3
+      \-
+      %a{href:@flac.vorbis_path} OGG/Vorbis

@@ -25,6 +25,11 @@ class Browser < Sinatra::Base
     Flac.new(full_path)
   end
 
+
+  get '/' do
+    redirect "/browse"
+  end
+
   get '/browse/?*' do
     @folder = get_folder(params)
     haml :browse
