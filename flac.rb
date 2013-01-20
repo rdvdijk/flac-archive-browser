@@ -87,11 +87,11 @@ class Flac < Handle
   end
 
   def mp3_data
-    %x(flac -s -c -d "#{@path}" | lame --quiet -V0 - -)
+    %x(flac -s -c -d "#{@path}" | lame --tt "#{title}" --ta "#{artist}" --tl "#{album}" --tn "#{track_number}" --tg "#{genre}" --ty "#{date}" --tc "#{comment}" --quiet -V0 - -)
   end
 
   def ogg_vorbis_data
-    %x(flac -s -c -d "#{@path}" | oggenc -Q -q 6 -)
+    %x(flac -s -c -d "#{@path}" | oggenc -t "#{title}" -a "#{artist}" -l "#{album}" -N "#{track_number}" -G "#{genre}" -d "#{date}" -c "#{comment}" -Q -q 6 -)
   end
 
   def title
@@ -99,6 +99,30 @@ class Flac < Handle
   end
 
   private
+
+  def artist
+    flac_info.tags["ARTIST"]
+  end
+
+  def album
+    flac_info.tags["ALBUM"]
+  end
+
+  def track_number
+    flac_info.tags["TRACKNUMBER"]
+  end
+
+  def genre
+    flac_info.tags["GENRE"]
+  end
+
+  def date
+    flac_info.tags["DATE"]
+  end
+
+  def comment
+    flac_info.tags["COMMENT"]
+  end
 
   def flac_info
     @flac_info ||= FlacInfo.new(@path)
