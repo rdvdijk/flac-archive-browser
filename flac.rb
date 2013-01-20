@@ -1,5 +1,6 @@
 require 'ruby-audio'
 require 'flacinfo'
+require 'icanhasaudio'
 
 class Flac < Handle
 
@@ -7,6 +8,8 @@ class Flac < Handle
 
   def initialize(path)
     @path = path
+
+    # OGG/Vorbis
     @sound_info = RubyAudio::SoundInfo.new(
       :channels => 2,
       :samplerate => 44100,
@@ -31,8 +34,12 @@ class Flac < Handle
     URI.encode "/listen#{path_suffix}"
   end
 
-  def stream_path
-    URI.encode "/stream#{path_suffix}"
+  def stream_vorbis_path
+    URI.encode "/stream-vorbis#{path_suffix}"
+  end
+
+  def stream_mp3_path
+    URI.encode "/stream-mp3#{path_suffix}"
   end
 
   def flac_path
@@ -61,6 +68,20 @@ class Flac < Handle
     out_sound.close
   end
 
+  def stream_mp3
+    encoder = Audio::MPEG::Encoder.new
+    encoder.init
+
+    RubyAudio::Sound.open(@path) do |sound|
+      while buf = sound.read(:short, 64*1024) and buf.real_size > 0
+        input = buffer_to_io(buf)
+        encoder.encode_io(input) do |data|
+          yield data
+        end
+      end
+    end
+  end
+
   def flac_data
     File.read(@path)
   end
@@ -81,6 +102,25 @@ class Flac < Handle
 
   def flac_info
     @flac_info ||= FlacInfo.new(@path)
+  end
+
+  # Taken from RustRadio::ShoutcastWriter
+  def buffer_to_io(buffer)
+    samples = buffer_to_samples(buffer)
+
+    in_buffer = StringIO.new
+    in_buffer.write(samples.pack("v*"))
+    in_buffer.seek(0)
+
+    in_buffer
+  end
+
+  def buffer_to_samples(buffer)
+    samples = []
+    buffer.each do |left, right|
+      samples << left << right
+    end
+    samples
   end
 
 end

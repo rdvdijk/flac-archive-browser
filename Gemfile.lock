@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/rdvdijk/icanhasaudio.git
+  revision: 23df3ea4e123da4254a7bc80c4af52ea8effedf8
+  specs:
+    icanhasaudio (0.1.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -36,6 +42,7 @@ PLATFORMS
 DEPENDENCIES
   flacinfo-rb
   haml
+  icanhasaudio (= 0.1.3)!
   ruby-audio
   sinatra
   sinatra-contrib

@@ -26,7 +26,8 @@
 
       %h4 Listen
       %audio{controls:"controls", autoplay:"autoplay", preload:"none"}
-        %source{src:@flac.stream_path}
+        %source{src:@flac.stream_mp3_path}
+        %source{src:@flac.stream_vorbis_path}
 
       %h4 Download
       %a{href:@flac.flac_path} FLAC

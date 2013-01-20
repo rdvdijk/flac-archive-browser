@@ -43,12 +43,23 @@ class Browser < Sinatra::Base
     haml :listen
   end
 
-  get '/stream/*' do
+  get '/stream-vorbis/*' do
     @flac = get_flac(params)
 
     content_type "application/ogg"
     stream do |out|
       @flac.stream_ogg_vorbis do |data|
+        out << data
+      end
+    end
+  end
+
+  get '/stream-mp3/*' do
+    @flac = get_flac(params)
+
+    content_type "audio/mpeg"
+    stream do |out|
+      @flac.stream_mp3 do |data|
         out << data
       end
     end
