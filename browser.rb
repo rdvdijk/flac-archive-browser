@@ -14,13 +14,13 @@ require './folder'
 class Browser < Sinatra::Base
 
   def get_folder(params)
-    folder_path = params[:splat].first
+    folder_path = URI.decode_www_form_component(params[:splat].first)
     full_path = File.join(Configuration.archive_path, folder_path)
     Folder.new(full_path)
   end
 
   def get_flac(params)
-    flac_path = params[:splat].first
+    flac_path = URI.decode_www_form_component(params[:splat].first)
     full_path = File.join(Configuration.archive_path, flac_path)
     Flac.new(full_path)
   end

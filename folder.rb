@@ -7,7 +7,7 @@ class Folder < Handle
   end
 
   def browse_path
-    "/browse#{encode(path_suffix)}"
+    "/browse/#{encode(path_suffix)}"
   end
 
   def folders

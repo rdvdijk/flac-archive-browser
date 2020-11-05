@@ -31,27 +31,27 @@ class Flac < Handle
   end
 
   def listen_path
-    URI.encode "/listen#{path_suffix}"
+    "/listen/#{encoded_path_suffix}"
   end
 
   def stream_vorbis_path
-    URI.encode "/stream-vorbis#{path_suffix}"
+    "/stream-vorbis/#{encoded_path_suffix}"
   end
 
   def stream_mp3_path
-    URI.encode "/stream-mp3#{path_suffix}"
+    "/stream-mp3/#{encoded_path_suffix}"
   end
 
   def flac_path
-    URI.encode "/flac#{path_suffix}"
+    "/flac/#{encoded_path_suffix}"
   end
 
   def mp3_path
-    URI.encode "/mp3#{path_suffix}"
+    "/mp3/#{encoded_path_suffix}"
   end
 
   def vorbis_path
-    URI.encode "/ogg_vorbis#{path_suffix}"
+    "/ogg_vorbis/#{encoded_path_suffix}"
   end
 
   def stream_ogg_vorbis
@@ -145,6 +145,12 @@ class Flac < Handle
       samples << left << right
     end
     samples
+  end
+
+  private
+
+  def encode(value)
+    URI.encode_www_form_component(value)
   end
 
 end
