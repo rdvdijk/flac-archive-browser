@@ -9,6 +9,10 @@ gem 'flacinfo-rb'
 gem "icanhasaudio", "0.1.3", :github => "rdvdijk/icanhasaudio"
 gem "yaml"
 
+group :staging, :production do
+  gem "rack-ssl-enforcer"
+end
+
 group :development do
   gem "capistrano", "~> 3.14", require: false
 end

@@ -33,6 +33,7 @@ GEM
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
+    rack-ssl-enforcer (0.2.9)
     rake (13.0.1)
     ruby-audio (1.6.1)
     ruby2_keywords (0.0.2)
@@ -63,6 +64,7 @@ DEPENDENCIES
   haml
   icanhasaudio (= 0.1.3)!
   puma
+  rack-ssl-enforcer
   ruby-audio
   sinatra
   sinatra-contrib

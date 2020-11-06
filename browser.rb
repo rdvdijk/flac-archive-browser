@@ -13,6 +13,11 @@ require './folder'
 
 class Browser < Sinatra::Base
 
+  if production? || environment == :staging
+    require 'rack/ssl-enforcer'
+    use Rack::SslEnforcer
+  end
+
   def get_folder(params)
     folder_path = URI.decode_www_form_component(params[:splat].first)
     full_path = File.join(Configuration.archive_path, folder_path)
