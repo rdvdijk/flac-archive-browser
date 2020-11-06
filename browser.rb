@@ -25,10 +25,6 @@ class Browser < Sinatra::Base
     Flac.new(full_path)
   end
 
-  use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    [username, password] == [Configuration.username, Configuration.password]
-  end
-
   get '/' do
     redirect "/browse"
   end
