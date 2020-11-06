@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.14.1"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :application, "flac-archive-browser"
+set :repo_url, "git@github.com:rdvdijk/flac-archive-browser.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -23,6 +23,7 @@ set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 # Default value for :linked_files is []
 append :linked_files, "config/config.yml"
+append :linked_files, "config/puma/#{fetch(:stage)}.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"

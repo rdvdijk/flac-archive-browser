@@ -1,0 +1,3 @@
+config/puma/staging.rb
+config/puma/production.rb
+log/
