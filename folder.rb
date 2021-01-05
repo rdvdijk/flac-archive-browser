@@ -39,7 +39,7 @@ class Folder < Handle
   def info_file
     Dir.chdir(@path)
     txt_files = Dir.glob("*.txt").sort_by(&:length)
-    File.read(txt_files.first)
+    txt_files.any? ? File.read(txt_files.first) : ""
   end
 
 end

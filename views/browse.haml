@@ -2,69 +2,82 @@
 %html
   %head
     %title= "FLAC Archive Browser"
-    %link(rel="stylesheet" href="/bootstrap/css/bootstrap.min.css") 
+    %link(rel="stylesheet" href="/bootstrap/css/bootstrap.min.css")
+    %link(rel="stylesheet" href="/bootstrap/css/bootstrap-grid.min.css")
     %link(rel="stylesheet" href="/style.css")
     %script(type="text/javascript" src="http://code.jquery.com/jquery-latest.js")
     %script(type="text/javascript" src="/bootstrap/js/bootstrap.min.js")
+    %script(type="text/javascript" src="/howler.core.min.js")
+    :javascript
+      function stop() {
+        Howler.stop();
+      }
+      function play(oggPath, mp3Path) {
+        stop();
+        var sound = new Howl({
+          src: [oggPath, mp3Path],
+          format: ['ogg', 'mp3']
+        });
+        sound.play();
+      }
 
   %body
 
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar{:"data-toggle"=>"collapse", :"data-target"=>".nav-collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{href:'/'} FLAC Archive Browser
-          .nav-collapse.collapse
-            %ul.nav
-              %li.active
-                %a{href:@folder.parent_browse_path}= @folder.parent_name
-          -#     %li
-          -#       %a{href:"#"} About
-          -#     %li
-          -#       %a{href:"#"} Contact
+    .navbar.navbar-expand-lg.navbar-dark.bg-dark
+      %a.navbar-brand{href:'/'} FLAC Archive Browser
+      .navbar-collapse.collapse.show
+        %ul.navbar-nav
+          %li.nav-item.active
+            %a.nav-link{href:@folder.parent_browse_path}= @folder.parent_name
 
-    #content.container
+    #content.container-fluid.py-md-3
       %h3= @folder.name
 
-      - if @folder.folders?
-        %p Folders:
-        %table.table.table-striped.table-bordered.table-hover.table-condensed
-          - @folder.folders.each do |folder|
-            %tr
-              %td
-                %a{href:folder.browse_path}= folder.name
+      .row
+        .col-md-5
+          - if @folder.folders?
+            %h5 Folders:
+            %table.table.table-striped.table-bordered.table-hover.table-sm
+              - @folder.folders.each do |folder|
+                %tr
+                  %td
+                    %a{href:folder.browse_path}= folder.name
 
-      - if @folder.flacs?
-        %p Info file:
-        %pre.info-file= @folder.info_file
+          - if @folder.flacs?
+            %h5 Info file:
+            %pre.border.rounded.info-file= @folder.info_file
 
-        %p FLACs:
-        %table.table.table-striped.table-bordered.table-hover.table-condensed
-          %thead
-            %tr
-              %th
-                file
-              %th
-                listen
-              %th 
-                size
-              %th{colspan:3}
-                download
-          %tbody
-            - @folder.flacs.each do |flac|
-              %tr
-                %td
-                  = flac.name
-                %td
-                  %a{href:flac.listen_path}= flac.title
-                %td
-                  = flac.size
-                %td
-                  %a{href:flac.flac_path} FLAC
-                %td
-                  %a{href:flac.mp3_path} MP3
-                %td
-                  %a{href:flac.vorbis_path} OGG/Vorbis
+        .col-md-7
+          - if @folder.flacs?
+            %h5 FLACs:
+            %table.table.table-striped.table-bordered.table-hover.table-sm
+              %thead
+                %tr
+                  %th
+                    file
+                  %th
+                    listen
+                    %a{href:'#', onclick:"stop(); return false;"} &#9724;
+                  %th
+                    size
+                  %th
+                    download
+              %tbody
+                - @folder.flacs.each do |flac|
+                  %tr
+                    %td
+                      = flac.name
+                    %td
+                      %a{href:'#', onclick:"play('#{flac.stream_vorbis_path}', '#{flac.stream_mp3_path}'); return false;"} &#9654;
+                      %a{href:flac.listen_path}= flac.title
+                    %td
+                      = flac.size
+                    %td
+                      %a{href:flac.flac_path}
+                        FLAC
+                      \/
+                      %a{href:flac.mp3_path}
+                        MP3
+                      \/
+                      %a{href:flac.vorbis_path}
+                        OGG

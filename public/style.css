@@ -1,8 +1,4 @@
-#content {
-  padding-top: 45px;
-}
-
 .info-file {
-  height: 85px;
-  overflow: scroll;
+  white-space: pre-wrap;
+  background-color: rgba(0, 0, 0, 0.05);
 }
