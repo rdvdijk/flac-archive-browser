@@ -54,28 +54,25 @@
               %thead
                 %tr
                   %th
-                    file
+                    download
                   %th
                     listen
                     %a{href:'#', onclick:"stop(); return false;"} &#9724;
                   %th
                     size
                   %th
-                    download
+                    convert
               %tbody
                 - @folder.flacs.each do |flac|
                   %tr
                     %td
-                      = flac.name
+                      %a{href:flac.flac_path}= flac.name
                     %td
                       %a{href:'#', onclick:"play('#{flac.stream_vorbis_path}', '#{flac.stream_mp3_path}'); return false;"} &#9654;
                       %a{href:flac.listen_path}= flac.title
                     %td
                       = flac.size
                     %td
-                      %a{href:flac.flac_path}
-                        FLAC
-                      \/
                       %a{href:flac.mp3_path}
                         MP3
                       \/
