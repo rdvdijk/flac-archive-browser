@@ -6,7 +6,7 @@ gem 'ruby-audio'
 gem 'puma'
 gem 'haml'
 gem 'flacinfo-rb'
-gem "icanhasaudio", "0.1.3", :github => "rdvdijk/icanhasaudio"
+gem "lame", "0.0.5"
 gem "yaml"
 
 group :staging, :production do
