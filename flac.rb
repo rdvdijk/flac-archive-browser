@@ -1,6 +1,6 @@
 require 'ruby-audio'
 require 'flacinfo'
-require 'icanhasaudio'
+require 'lame'
 
 class Flac < Handle
 
@@ -69,13 +69,16 @@ class Flac < Handle
   end
 
   def stream_mp3
-    encoder = Audio::MPEG::Encoder.new
-    encoder.init
+    encoder = LAME::Encoder.new
+    encoder.configure do |config|
+      config.bitrate = 192
+      config.quality = 2
+    end
 
     RubyAudio::Sound.open(@path) do |sound|
       while buf = sound.read(:short, 64*1024) and buf.real_size > 0
-        input = buffer_to_io(buf)
-        encoder.encode_io(input) do |data|
+        input = buffer_to_samples(buf).flatten.map(&:to_i)
+        encoder.encode_interleaved_short(input) do |data|
           yield data
         end
       end

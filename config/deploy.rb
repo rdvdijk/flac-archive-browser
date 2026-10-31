@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.14.1"
+lock "~> 3.20.1"
 
 set :application, "flac-archive-browser"
 set :repo_url, "git@github.com:rdvdijk/flac-archive-browser.git"
@@ -41,4 +41,4 @@ set :keep_releases, 10
 # set :ssh_options, verify_host_key: :secure
 #
 # Set Ruby version to use during deployment:
-set :chruby_ruby, 'ruby-2.7.1'
+set :chruby_ruby, 'ruby-3.4.12'
