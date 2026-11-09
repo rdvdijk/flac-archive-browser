@@ -2,7 +2,7 @@
 lock "~> 3.20.1"
 
 set :application, "flac-archive-browser"
-set :repo_url, "git@github.com:rdvdijk/flac-archive-browser.git"
+set :repo_url, "https://github.com/rdvdijk/flac-archive-browser.git" # https : read-only
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -41,4 +41,5 @@ set :keep_releases, 10
 # set :ssh_options, verify_host_key: :secure
 #
 # Set Ruby version to use during deployment:
-set :chruby_ruby, 'ruby-3.4.12'
+set :mise_ruby_version, '3.4.12'
+set :mise_path, '/usr/bin/mise'
